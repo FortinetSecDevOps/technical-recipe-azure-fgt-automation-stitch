@@ -52,6 +52,7 @@ resource "azurerm_virtual_machine" "virtual_machine" {
     admin_password = local.password
     custom_data = templatefile("${local.fgtvm_configuration}", {
       hostname     = local.hostname
+      api_key      = random_string.string.id
       type         = local.vm_image["fortigate"].license_type
       license_file = local.license_file
     })

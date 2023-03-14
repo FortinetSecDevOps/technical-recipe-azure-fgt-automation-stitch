@@ -1,5 +1,5 @@
 locals {
-  resource_group_exists        = true
+  resource_group_exists        = false
   resource_group_name_combined = "${var.username}-${var.resource_group_name_suffix}"
 
   username = var.username

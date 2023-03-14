@@ -10,3 +10,7 @@ output "credentials" {
   value     = format("username: %s / password: %s", local.username, local.password)
   sensitive = true
 }
+
+output "api_key" {
+  value = random_string.string.id
+}
