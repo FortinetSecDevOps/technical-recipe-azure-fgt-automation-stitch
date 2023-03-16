@@ -2,19 +2,19 @@ locals {
   http_headers = [
     {
       key   = "ResourceGroupName"
-      value = "rg-name"
+      value = var.resource_group_name
     },
     {
       key   = "RouteTableName"
-      value = "route-table-name"
+      value = var.route_table_name
     },
     {
       key   = "RouteNamePrefix"
-      value = "route-name-prefix"
+      value = "microseg"
     },
     {
       key   = "NextHopIp"
-      value = "next-hop-ip"
+      value = var.next_hop_ip
     },
   ]
 }
@@ -25,7 +25,7 @@ resource "fortios_system_automationaction" "system_automationaction" {
   action_type = "webhook"
   protocol    = "https"
 
-  uri       = "your-webhook-to-azure-automation-runbook"
+  uri       = var.webhook
   http_body = "{\"action\":\"%%log.action%%\", \"addr\":\"%%log.addr%%\"}"
   port      = 443
 

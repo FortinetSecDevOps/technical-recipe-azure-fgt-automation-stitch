@@ -1,11 +1,13 @@
 resource "fortios_system_sdnconnector" "system_sdnconnector" {
-  name = "AzureSDN"
+  for_each = local.sdn_connectors
 
-  azure_region     = "global"
-  status           = "enable"
-  type             = "azure"
-  update_interval  = 60
-  use_metadata_iam = "enable"
-  subscription_id  = ""
-  resource_group   = ""
+  name = each.value.name
+
+  azure_region     = each.value.azure_region
+  status           = each.value.status
+  type             = each.value.type
+  update_interval  = each.value.update_interval
+  use_metadata_iam = each.value.use_metadata_iam
+  subscription_id  = each.value.subscription_id
+  resource_group   = each.value.resource_group
 }

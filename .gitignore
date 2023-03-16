@@ -30,4 +30,4 @@ override.tf.json
 
 # Misc
 .vscode
-terraform.tfvars
+*.auto.tfvars
