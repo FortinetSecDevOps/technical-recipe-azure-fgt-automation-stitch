@@ -85,4 +85,28 @@ locals {
       ]
     }
   }
+
+  system_automationstitches = {
+    "routetableupdate-AppServers" = {
+      name        = "routetableupdate-AppServers"
+      description = "Update route table for App Servers"
+      status      = "enable"
+      trigger     = fortios_system_automationtrigger.system_automationtrigger["AppServer Existence"].name
+      action_name = fortios_system_automationaction.system_automationaction.name
+    }
+    "routetableupdate-DbServers" = {
+      name        = "routetableupdate-DbServers"
+      description = "Update route table for Db Servers"
+      status      = "enable"
+      trigger     = fortios_system_automationtrigger.system_automationtrigger["DbServer Existence"].name
+      action_name = fortios_system_automationaction.system_automationaction.name
+    }
+    "routetableupdate-WebServers" = {
+      name        = "routetableupdate-WebServers"
+      description = "Update route table for Web Servers"
+      status      = "enable"
+      trigger     = fortios_system_automationtrigger.system_automationtrigger["WebServer Existence"].name
+      action_name = fortios_system_automationaction.system_automationaction.name
+    }
+  }
 }

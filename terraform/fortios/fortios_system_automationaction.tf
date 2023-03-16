@@ -28,8 +28,8 @@ resource "fortios_system_automationaction" "system_automationaction" {
   uri       = "your-webhook-to-azure-automation-runbook"
   http_body = "{\"action\":\"%%log.action%%\", \"addr\":\"%%log.addr%%\"}"
   port      = 443
-  
-  dynamic http_headers {
+
+  dynamic "http_headers" {
     for_each = local.http_headers
 
     content {
