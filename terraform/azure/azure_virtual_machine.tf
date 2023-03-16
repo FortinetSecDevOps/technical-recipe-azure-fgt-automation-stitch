@@ -17,6 +17,10 @@ resource "azurerm_virtual_machine" "virtual_machine" {
 
   zones = [1]
 
+  identity {
+    type = "SystemAssigned"
+  }
+
   storage_image_reference {
     publisher = local.vm_image["fortigate"].publisher
     offer     = local.vm_image["fortigate"].offer
