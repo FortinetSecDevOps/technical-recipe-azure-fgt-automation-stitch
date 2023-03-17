@@ -11,20 +11,20 @@ variable "fortigate_api_token" {
 
 variable "resource_group_name" {
   type    = string
-  default = ""  
+  default = ""
 }
 
 variable "route_table_name" {
   type    = string
-  default = ""  
+  default = ""
 }
 
 variable "next_hop_ip" {
   type    = string
-  default = ""  
+  default = ""
 }
 
 variable "webhook" {
   type    = string
-  default = ""  
+  default = ""
 }

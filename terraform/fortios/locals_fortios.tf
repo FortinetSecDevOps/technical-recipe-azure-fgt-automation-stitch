@@ -1,36 +1,39 @@
 locals {
   sdn_connectors = {
     "AzureSDN" = {
-        name = "AzureSDN"
+      name = "AzureSDN"
 
-        azure_region     = "global"
-        status           = "enable"
-        type             = "azure"
-        update_interval  = 60
-        use_metadata_iam = "enable"
-        subscription_id  = ""
-        resource_group   = ""
+      azure_region     = "global"
+      status           = "enable"
+      type             = "azure"
+      update_interval  = 60
+      use_metadata_iam = "enable"
+      subscription_id  = ""
+      resource_group   = ""
     }
   }
 
   firewall_addresses = {
     "AppServers" = {
-      name   = "AppServers"
-      type   = "dyanmic"
-      sdn    = fortios_system_sdnconnector.system_sdnconnector["AzureSDN"].name
-      filter = "Tag.ComputeType=AppServer"
+      name      = "AppServers"
+      interface = "port2"
+      type      = "dynamic"
+      sdn       = fortios_system_sdnconnector.system_sdnconnector["AzureSDN"].name
+      filter    = "Tag.ComputeType=AppServer"
     }
     "DbServers" = {
-      name   = "DbServers"
-      type   = "dyanmic"
-      sdn    = fortios_system_sdnconnector.system_sdnconnector["AzureSDN"].name
-      filter = "Tag.ComputeType=DbServer"
+      name      = "DbServers"
+      interface = "port2"
+      type      = "dynamic"
+      sdn       = fortios_system_sdnconnector.system_sdnconnector["AzureSDN"].name
+      filter    = "Tag.ComputeType=DbServer"
     }
     "WebServers" = {
-      name   = "WebServers"
-      type   = "dyanmic"
-      sdn    = fortios_system_sdnconnector.system_sdnconnector["AzureSDN"].name
-      filter = "Tag.ComputeType=WebServer"
+      name      = "WebServers"
+      interface = "port2"
+      type      = "dynamic"
+      sdn       = fortios_system_sdnconnector.system_sdnconnector["AzureSDN"].name
+      filter    = "Tag.ComputeType=WebServer"
     }
   }
 

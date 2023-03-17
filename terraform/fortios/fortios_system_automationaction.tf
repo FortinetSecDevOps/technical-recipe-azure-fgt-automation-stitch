@@ -25,7 +25,7 @@ resource "fortios_system_automationaction" "system_automationaction" {
   action_type = "webhook"
   protocol    = "https"
 
-  uri       = var.webhook
+  uri       = replace(var.webhook, "https://", "")
   http_body = "{\"action\":\"%%log.action%%\", \"addr\":\"%%log.addr%%\"}"
   port      = 443
 
