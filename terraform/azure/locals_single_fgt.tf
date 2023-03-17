@@ -1,9 +1,9 @@
 locals {
-  resource_group_exists        = false
-  resource_group_name_combined = "${var.username}-${var.resource_group_name_suffix}"
-
   username = var.username
   password = "Fortinet123#"
+
+  resource_group_exists        = false
+  resource_group_name_combined = "${local.username}-${var.resource_group_name_suffix}"
 
   license_file        = ""
   fgtvm_configuration = "fgtvm.conf"
@@ -89,6 +89,24 @@ locals {
           subnet_id                     = azurerm_subnet.subnet["internal"].id
           private_ip_address_allocation = "Static"
           private_ip_address            = cidrhost(azurerm_subnet.subnet["internal"].address_prefixes[0], 4)
+          public_ip_address_id          = null
+        }
+      ]
+    }
+    "linux-nic-port1" = {
+      resource_group_name = local.resource_group_name
+      location            = local.location
+
+      name                          = "linux-nic-port1"
+      enable_ip_forwarding          = false
+      enable_accelerated_networking = false
+
+      ip_configurations = [
+        {
+          name                          = "ipconfig1"
+          subnet_id                     = azurerm_subnet.subnet["protected"].id
+          private_ip_address_allocation = "Static"
+          private_ip_address            = cidrhost(azurerm_subnet.subnet["protected"].address_prefixes[0], 4)
           public_ip_address_id          = null
         }
       ]
