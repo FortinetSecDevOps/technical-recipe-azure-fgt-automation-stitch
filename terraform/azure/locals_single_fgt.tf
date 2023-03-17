@@ -2,7 +2,7 @@ locals {
   username = var.username
   password = "Fortinet123#"
 
-  resource_group_exists        = false
+  resource_group_exists        = true
   resource_group_name_combined = "${local.username}-${var.resource_group_name_suffix}"
 
   license_file        = ""
@@ -216,12 +216,12 @@ locals {
     "vm-linux-1" = {
       name                  = "vm-linux-1"
       network_interface_ids = [azurerm_network_interface.network_interface["linux-1-nic-1"].id]
-      compute_type = "unknown"
+      compute_type          = "unknown"
     }
     "vm-linux-2" = {
       name                  = "vm-linux-2"
       network_interface_ids = [azurerm_network_interface.network_interface["linux-2-nic-1"].id]
-      compute_type = "WebServer"
+      compute_type          = "WebServer"
     }
   }
 
