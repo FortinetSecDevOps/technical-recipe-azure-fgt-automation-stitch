@@ -30,6 +30,13 @@ locals {
         payg = "fortinet_fg-vm_payg_2022"
       } # byol and flex use: fortinet_fg-vm | payg use: fortinet_fg-vm_payg_2022
     }
+    "linux_vm" = {
+      publisher = "Canonical"
+      offer     = "UbuntuServer"
+      vm_size   = "Standard_F2"
+      version   = "latest"
+      sku       = "16.04-LTS"
+    }
   }
 
   subnets = {
@@ -93,11 +100,11 @@ locals {
         }
       ]
     }
-    "linux-nic-port1" = {
+    "linux-1-nic-1" = {
       resource_group_name = local.resource_group_name
       location            = local.location
 
-      name                          = "linux-nic-port1"
+      name                          = "linux-1-nic-1"
       enable_ip_forwarding          = false
       enable_accelerated_networking = false
 
@@ -107,6 +114,24 @@ locals {
           subnet_id                     = azurerm_subnet.subnet["protected"].id
           private_ip_address_allocation = "Static"
           private_ip_address            = cidrhost(azurerm_subnet.subnet["protected"].address_prefixes[0], 4)
+          public_ip_address_id          = null
+        }
+      ]
+    }
+    "linux-2-nic-1" = {
+      resource_group_name = local.resource_group_name
+      location            = local.location
+
+      name                          = "linux-2-nic-1"
+      enable_ip_forwarding          = false
+      enable_accelerated_networking = false
+
+      ip_configurations = [
+        {
+          name                          = "ipconfig1"
+          subnet_id                     = azurerm_subnet.subnet["protected"].id
+          private_ip_address_allocation = "Static"
+          private_ip_address            = cidrhost(azurerm_subnet.subnet["protected"].address_prefixes[0], 5)
           public_ip_address_id          = null
         }
       ]
@@ -184,6 +209,19 @@ locals {
       source_address_prefix       = "*"
       destination_address_prefix  = "*"
       network_security_group_name = azurerm_network_security_group.network_security_group["nsg_internal"].name
+    }
+  }
+
+  linux_virtual_machines = {
+    "vm-linux-1" = {
+      name                  = "vm-linux-1"
+      network_interface_ids = [azurerm_network_interface.network_interface["linux-1-nic-1"].id]
+      compute_type = "unknown"
+    }
+    "vm-linux-2" = {
+      name                  = "vm-linux-2"
+      network_interface_ids = [azurerm_network_interface.network_interface["linux-2-nic-1"].id]
+      compute_type = "WebServer"
     }
   }
 
