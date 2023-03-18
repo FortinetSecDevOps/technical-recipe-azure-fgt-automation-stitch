@@ -1,7 +1,7 @@
 resource "azurerm_automation_runbook" "automation_runbook" {
 
-  resource_group_name = azurerm_resource_group.resource_group[0].name
-  location            = azurerm_resource_group.resource_group[0].location
+  resource_group_name = local.resource_group_name
+  location            = local.location
 
   name                    = "Update-RouteTable"
   automation_account_name = azurerm_automation_account.automation_account.name

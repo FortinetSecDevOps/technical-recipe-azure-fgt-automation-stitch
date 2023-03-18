@@ -1,6 +1,6 @@
 resource "azurerm_automation_webhook" "automation_webhook" {
 
-  resource_group_name = azurerm_resource_group.resource_group[0].name
+  resource_group_name = local.resource_group_name
 
   name                    = "Update-RouteTable_webhook"
   automation_account_name = azurerm_automation_account.automation_account.name
