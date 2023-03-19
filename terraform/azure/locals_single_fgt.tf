@@ -227,12 +227,12 @@ locals {
 
   role_assignments = {
     "vm-fgt" = {
-      scope                = azurerm_resource_group.resource_group[0].id
+      scope                = local.resource_group_id
       role_definition_name = "Contributor"
       principal_id         = azurerm_virtual_machine.virtual_machine.identity[0].principal_id
     }
     "automation-account" = {
-      scope                = azurerm_resource_group.resource_group[0].id
+      scope                = local.resource_group_id
       role_definition_name = "Contributor"
       principal_id         = azurerm_automation_account.automation_account.identity[0].principal_id
     }
