@@ -1,33 +1,15 @@
-locals {
-  http_headers = [
-    {
-      key   = "ResourceGroupName"
-      value = var.resource_group_name
-    },
-    {
-      key   = "RouteTableName"
-      value = var.route_table_name
-    },
-    {
-      key   = "RouteNamePrefix"
-      value = "microseg"
-    },
-    {
-      key   = "NextHopIp"
-      value = var.next_hop_ip
-    },
-  ]
-}
 resource "fortios_system_automationaction" "system_automationaction" {
+  for_each = local.system_automationaction
 
-  name        = "routetableupdate"
-  description = "Update Route Table for MicroSegmentation"
-  action_type = "webhook"
-  protocol    = "https"
+  name = each.value.name
 
-  uri       = replace(var.webhook, "https://", "")
-  http_body = "{\"action\":\"%%log.action%%\", \"addr\":\"%%log.addr%%\"}"
-  port      = 443
+  description = each.value.description
+  action_type = each.value.action_type
+  protocol    = each.value.protocol
+
+  uri       = each.value.uri
+  http_body = each.value.http_body
+  port      = each.value.port
 
   dynamic "http_headers" {
     for_each = local.http_headers
@@ -38,5 +20,5 @@ resource "fortios_system_automationaction" "system_automationaction" {
     }
   }
 
-  verify_host_cert = "disable"
+  verify_host_cert = each.value.verify_host_cert
 }

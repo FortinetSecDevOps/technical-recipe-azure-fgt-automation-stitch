@@ -1,28 +1,51 @@
 resource "fortios_firewall_policy" "firewall_policy" {
+  for_each = local.firewall_policys
 
-  action     = "accept"
-  logtraffic = "utm"
-  nat        = "disable"
-  status     = "enable"
-  schedule   = "always"
+  name = each.value.name
 
-  name = "webser2webserver"
-  srcintf {
-    name = "port2"
+  action     = each.value.action
+  logtraffic = each.value.logtraffic
+  nat        = each.value.nat
+  status     = each.value.status
+  schedule   = each.value.schedule
+
+  dynamic "srcintf" {
+    for_each = each.value.srcintf
+
+    content {
+      name = srcintf.value.name
+    }
   }
 
-  dstintf {
-    name = "port2"
-  }
-  srcaddr {
-    name = fortios_firewall_address.firewall_address["WebServers"].name
+  dynamic "dstintf" {
+    for_each = each.value.dstintf
+
+    content {
+      name = dstintf.value.name
+    }
   }
 
-  dstaddr {
-    name = fortios_firewall_address.firewall_address["WebServers"].name
+  dynamic "srcaddr" {
+    for_each = each.value.srcaddr
+
+    content {
+      name = srcaddr.value.name
+    }
   }
 
-  service {
-    name = "ALL"
+  dynamic "dstaddr" {
+    for_each = each.value.dstaddr
+
+    content {
+      name = dstaddr.value.name
+    }
+  }
+
+  dynamic "service" {
+    for_each = each.value.service
+
+    content {
+      name = service.value.name
+    }
   }
 }

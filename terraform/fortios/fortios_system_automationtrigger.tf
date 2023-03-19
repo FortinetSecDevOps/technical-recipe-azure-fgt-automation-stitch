@@ -6,7 +6,7 @@ resource "fortios_system_automationtrigger" "system_automationtrigger" {
   event_type  = each.value.event_type
 
   dynamic "logid_block" {
-    for_each = each.value.logid_blocks
+    for_each = each.value.logid_block
     content {
       id = logid_block.value.id
     }
@@ -15,7 +15,6 @@ resource "fortios_system_automationtrigger" "system_automationtrigger" {
   dynamic "fields" {
     for_each = each.value.fields
     content {
-      #id = fields.value.id
       name  = fields.value.name
       value = fields.value.value
     }

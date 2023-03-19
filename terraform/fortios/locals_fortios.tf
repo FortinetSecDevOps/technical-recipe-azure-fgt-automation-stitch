@@ -37,13 +37,74 @@ locals {
     }
   }
 
+  firewall_policys = {
+    "webserver2webserver" = {
+      name = "webser2webserver"
+
+      action     = "accept"
+      logtraffic = "utm"
+      nat        = "disable"
+      status     = "enable"
+      schedule   = "always"
+
+      srcintf = [
+        {
+          name = "port2"
+        }
+      ]
+
+      dstintf = [
+        {
+          name = "port2"
+        }
+      ]
+
+      srcaddr = [
+        {
+          name = fortios_firewall_address.firewall_address["WebServers"].name
+        }
+      ]
+
+      dstaddr = [
+        {
+          name = fortios_firewall_address.firewall_address["WebServers"].name
+        }
+      ]
+
+      service = [
+        {
+          name = "ALL"
+        }
+      ]
+    }
+  }
+
+  http_headers = [
+    {
+      key   = "ResourceGroupName"
+      value = var.resource_group_name
+    },
+    {
+      key   = "RouteTableName"
+      value = var.route_table_name
+    },
+    {
+      key   = "RouteNamePrefix"
+      value = "microseg"
+    },
+    {
+      key   = "NextHopIp"
+      value = var.next_hop_ip
+    }
+  ]
+
   system_automationtriggers = {
     "AppServer Existence" = {
       name        = "AppServer Existence"
       description = "Tag ComputeType with value of AppServer updates route table."
       event_type  = "event-log"
 
-      logid_blocks = [
+      logid_block = [
         {
           id = 53200
         },
@@ -64,7 +125,7 @@ locals {
       description = "Tag ComputeType with value of DbServer updates route table."
       event_type  = "event-log"
 
-      logid_blocks = [
+      logid_block = [
         {
           id = 53200
         },
@@ -85,7 +146,7 @@ locals {
       description = "Tag ComputeType with value of WebServer updates route table."
       event_type  = "event-log"
 
-      logid_blocks = [
+      logid_block = [
         {
           id = 53200
         },
@@ -103,27 +164,56 @@ locals {
     }
   }
 
+  system_automationaction = {    
+    "routetableupdate" = {
+      name             = "routetableupdate"
+      description      = "Update Route Table for MicroSegmentation"
+      action_type      = "webhook"
+      protocol         = "https"
+      uri              = replace(var.webhook, "https://", "")
+      http_body        = "{\"action\":\"%%log.action%%\", \"addr\":\"%%log.addr%%\"}"
+      port             = 443
+      verify_host_cert = "disable"
+    }
+  }
+
   system_automationstitches = {
     "routetableupdate-AppServers" = {
       name        = "routetableupdate-AppServers"
       description = "Update route table for App Servers"
       status      = "enable"
       trigger     = fortios_system_automationtrigger.system_automationtrigger["AppServer Existence"].name
-      action_name = fortios_system_automationaction.system_automationaction.name
+
+      actions = [
+        {
+          action = fortios_system_automationaction.system_automationaction["routetableupdate"].name
+        }
+      ]
     }
     "routetableupdate-DbServers" = {
       name        = "routetableupdate-DbServers"
       description = "Update route table for Db Servers"
       status      = "enable"
       trigger     = fortios_system_automationtrigger.system_automationtrigger["DbServer Existence"].name
-      action_name = fortios_system_automationaction.system_automationaction.name
+
+
+      actions = [
+        {
+          action = fortios_system_automationaction.system_automationaction["routetableupdate"].name
+        }
+      ]
     }
     "routetableupdate-WebServers" = {
       name        = "routetableupdate-WebServers"
       description = "Update route table for Web Servers"
       status      = "enable"
       trigger     = fortios_system_automationtrigger.system_automationtrigger["WebServer Existence"].name
-      action_name = fortios_system_automationaction.system_automationaction.name
+
+      actions = [
+        {
+          action = fortios_system_automationaction.system_automationaction["routetableupdate"].name
+        }
+      ]
     }
   }
 }

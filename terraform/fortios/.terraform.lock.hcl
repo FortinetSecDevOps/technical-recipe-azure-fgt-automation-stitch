@@ -2,7 +2,8 @@
 # Manual edits may be lost in future updates.
 
 provider "registry.terraform.io/fortinetdev/fortios" {
-  version = "1.16.0"
+  version     = "1.16.0"
+  constraints = "~> 1.16.0"
   hashes = [
     "h1:u8woUj3A0t97IwvLDgUYdfaBbiyInWAO1EgvAo8Hot0=",
     "zh:206f1d9ebf0565025dda2b9eabdaaf3ea96788d005d73c08a8edb3cd8235956d",
