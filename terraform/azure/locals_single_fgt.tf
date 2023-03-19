@@ -2,7 +2,7 @@ locals {
   username = var.username
   password = "Fortinet123#"
 
-  resource_group_exists        = false
+  resource_group_exists        = true
   resource_group_name_combined = "${local.username}-${var.resource_group_name_suffix}"
 
   license_file        = ""
