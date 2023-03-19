@@ -234,7 +234,7 @@ locals {
     "automation-account" = {
       scope                = azurerm_resource_group.resource_group[0].id
       role_definition_name = "Contributor"
-      principal_id         = azurerm_user_assigned_identity.user_assigned_identity.principal_id
+      principal_id         = azurerm_automation_account.automation_account.identity[0].principal_id
     }
   }
 }

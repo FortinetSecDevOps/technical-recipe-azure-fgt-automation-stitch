@@ -7,7 +7,7 @@ resource "azurerm_automation_account" "automation_account" {
   sku_name = "Basic"
 
   identity {
-    type         = "UserAssigned"
-    identity_ids = [azurerm_user_assigned_identity.user_assigned_identity.id]
+    type         = "SystemAssigned"
+    #identity_ids = [azurerm_user_assigned_identity.user_assigned_identity.id]
   }
 }
