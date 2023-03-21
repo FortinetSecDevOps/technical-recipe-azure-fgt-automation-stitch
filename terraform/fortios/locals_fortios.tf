@@ -164,7 +164,7 @@ locals {
     }
   }
 
-  system_automationaction = {    
+  system_automationaction = {
     "routetableupdate" = {
       name             = "routetableupdate"
       description      = "Update Route Table for MicroSegmentation"

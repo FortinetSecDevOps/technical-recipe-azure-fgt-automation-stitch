@@ -28,3 +28,8 @@ variable "webhook" {
   type    = string
   default = ""
 }
+
+variable "static_routes" {
+  type    = map
+  default = {}
+}

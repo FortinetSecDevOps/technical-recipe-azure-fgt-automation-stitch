@@ -1,8 +1,8 @@
 resource "fortios_router_static" "router_static" {
+  for_each = var.static_routes
 
-  device  = "port2"
-  dst     = "10.1.2.0/24"
-  gateway = "10.1.1.1"
-  status  = "enable"
-
+  device  = each.value.device
+  dst     = each.value.dst
+  gateway = each.value.gateway
+  status  = each.value.status
 }
