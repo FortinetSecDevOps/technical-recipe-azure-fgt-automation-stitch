@@ -10,3 +10,4 @@ output "credentials" {
   value     = format("username: %s / password: %s", local.username, local.password)
   sensitive = true
 }
+
