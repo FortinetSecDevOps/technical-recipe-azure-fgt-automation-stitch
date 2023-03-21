@@ -30,6 +30,6 @@ variable "webhook" {
 }
 
 variable "static_routes" {
-  type    = map
+  type    = map(any)
   default = {}
 }
