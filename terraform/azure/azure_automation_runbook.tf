@@ -4,7 +4,7 @@ resource "azurerm_automation_runbook" "automation_runbook" {
   location            = local.location
 
   name                    = "Update-RouteTable"
-  automation_account_name = azurerm_automation_account.automation_account.name
+  automation_account_name = azurerm_automation_account.automation_account[format("%s-automation-account", local.username)].name
   log_verbose             = "true"
   log_progress            = "true"
   runbook_type            = "PowerShell"

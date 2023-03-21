@@ -1,9 +1,9 @@
 locals {
-  username = var.username
-  password = "Fortinet123#"
-
   resource_group_exists        = true
   resource_group_name_combined = "${local.username}-${var.resource_group_name_suffix}"
+
+  username = var.username
+  password = "Fortinet123#"
 
   license_file        = ""
   fgtvm_configuration = "fgtvm.conf"
@@ -17,6 +17,17 @@ locals {
   environment_tag               = "Terraform Single FortiGate"
   virtual_network_name          = "vnet-single-fortigate"
   virtual_network_address_space = "10.1.0.0/16"
+
+  automation_accounts = {
+    format("%s-automation-account", local.username) = {
+      resource_group_name = local.resource_group_name
+      location            = local.location
+
+      name          = format("%s-automation-account", local.username)
+      sku_name      = "Basic"
+      identity_type = "SystemAssigned"
+    }
+  }
 
   vm_image = {
     "fortigate" = {
@@ -234,7 +245,7 @@ locals {
     "automation-account" = {
       scope                = local.resource_group_id
       role_definition_name = "Contributor"
-      principal_id         = azurerm_automation_account.automation_account.identity[0].principal_id
+      principal_id         = azurerm_automation_account.automation_account[format("%s-automation-account", local.username)].identity[0].principal_id
     }
   }
 }

@@ -1,13 +1,13 @@
 resource "azurerm_automation_account" "automation_account" {
+  for_each = local.automation_accounts
 
-  resource_group_name = local.resource_group_name
-  location            = local.location
+  resource_group_name = each.value.resource_group_name
+  location            = each.value.location
 
-  name     = format("%s-automation-account", local.username)
-  sku_name = "Basic"
+  name     = each.value.name
+  sku_name = each.value.sku_name
 
   identity {
-    type = "SystemAssigned"
-    #identity_ids = [azurerm_user_assigned_identity.user_assigned_identity.id]
+    type = each.value.identity_type
   }
 }
