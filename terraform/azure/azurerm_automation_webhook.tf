@@ -7,5 +7,4 @@ resource "azurerm_automation_webhook" "automation_webhook" {
   expiry_time             = "2024-12-31T00:00:00Z"
   enabled                 = true
   runbook_name            = azurerm_automation_runbook.automation_runbook.name
-
 }

@@ -1,11 +1,3 @@
-resource "random_id" "id" {
-  keepers = {
-    resource_group = local.resource_group_name
-  }
-
-  byte_length = 8
-}
-
 resource "azurerm_storage_account" "storage_account" {
 
   resource_group_name = local.resource_group_name
