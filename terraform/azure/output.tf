@@ -3,7 +3,7 @@ output "ResourceGroup" {
 }
 
 output "FortiGate_Public_IP" {
-  value = format("https://%s", azurerm_public_ip.public_ip.ip_address)
+  value = format("https://%s", azurerm_public_ip.public_ip["pip-fgt"].ip_address)
 }
 
 output "credentials" {

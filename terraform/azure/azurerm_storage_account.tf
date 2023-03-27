@@ -1,15 +1,12 @@
 resource "azurerm_storage_account" "storage_account" {
+  for_each = local.storage_accounts
 
-  resource_group_name = local.resource_group_name
-  location            = local.location
+  resource_group_name = each.value.resource_group_name
+  location            = each.value.location
 
-  name                     = "diag${random_id.id.hex}"
-  account_replication_type = "LRS"
-  account_tier             = "Standard"
+  name                     = format("%s%s",each.value.name, random_id.id.hex)
+  account_replication_type = each.value.account_replication_type
+  account_tier             = each.value.account_tier
 
-  min_tls_version = "TLS1_2"
-
-  tags = {
-    environment = local.environment_tag
-  }
+  min_tls_version = each.value.min_tls_version
 }

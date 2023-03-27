@@ -8,8 +8,8 @@ resource "azurerm_virtual_machine" "virtual_machine" {
 
   name = local.hostname
 
-  network_interface_ids        = [azurerm_network_interface.network_interface["nic-port1"].id, azurerm_network_interface.network_interface["nic-port2"].id]
-  primary_network_interface_id = azurerm_network_interface.network_interface["nic-port1"].id
+  network_interface_ids        = [azurerm_network_interface.network_interface["nic-fgt-port1"].id, azurerm_network_interface.network_interface["nic-fgt-port2"].id]
+  primary_network_interface_id = azurerm_network_interface.network_interface["nic-fgt-port1"].id
   vm_size                      = local.vm_image["fortigate"].vm_size
 
   delete_os_disk_on_termination    = true

@@ -1,11 +1,9 @@
 resource "azurerm_virtual_network" "virtual_network" {
-  resource_group_name = local.resource_group_name
-  location            = local.location
+  for_each = local.virtual_networks
 
-  name          = local.virtual_network_name
-  address_space = [local.virtual_network_address_space]
+  resource_group_name = each.value.resource_group_name
+  location            = each.value.location
 
-  tags = {
-    environment = local.environment_tag
-  }
+  name          = each.value.name
+  address_space = each.value.address_space
 }
