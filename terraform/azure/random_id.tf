@@ -3,5 +3,5 @@ resource "random_id" "id" {
     resource_group = local.resource_group_name
   }
 
-  byte_length = 8
+  byte_length = 4
 }

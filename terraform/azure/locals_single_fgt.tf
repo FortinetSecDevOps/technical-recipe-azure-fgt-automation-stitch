@@ -48,7 +48,7 @@ locals {
 
       name                    = "Update-RouteTable_webhook"
       automation_account_name = azurerm_automation_account.automation_account[format("aa-%s", local.username)].name
-      expiry_time             = timeadd(timestamp(), "1y")
+      expiry_time             = timeadd(timestamp(), "8760h")
       enabled                 = true
       runbook_name            = azurerm_automation_runbook.automation_runbook["Update-RouteTable"].name
     }
@@ -94,11 +94,11 @@ locals {
   }
 
   storage_accounts = {
-    format("stdiag%s", local.username) = {
+    format("st%s", local.username) = {
       resource_group_name = local.resource_group_name
       location            = local.location
 
-      name                     = format("stdiag%s", local.username)
+      name                     = substr(format("st%s", local.username), 0, 24)
       account_replication_type = "LRS"
       account_tier             = "Standard"
 
@@ -108,15 +108,11 @@ locals {
 
   vm_image = {
     "fortigate" = {
-      publisher    = "fortinet"
-      offer        = "fortinet_fortigate-vm_v5"
-      vm_size      = "Standard_DS2_v2"
-      version      = "latest" # can be a version number as well, e.g. 6.4.9, 7.0.6, 7.2.0
-      license_type = "payg"   # can be byol, flex, or payg, make sure the license is correct for the sku
-      sku = {
-        byol = "fortinet_fg-vm2"
-        payg = "fortinet_fg-vm_payg_2022"
-      } # byol and flex use: fortinet_fg-vm | payg use: fortinet_fg-vm_payg_2022
+      publisher = "fortinet"
+      offer     = "fortinet_fortigate-vm_v5"
+      vm_size   = "Standard_DS2_v2"
+      version   = "latest"                   # can also be a version, e.g. 6.4.9, 7.0.6, 7.2.0, etc. latest is latest
+      sku       = "fortinet_fg-vm_payg_2022" # can be byol|flex - fortinet_fg-vm2 or payg - "fortinet_fg-vm_payg_2022"
     }
     "linux_vm" = {
       publisher = "Canonical"
@@ -321,6 +317,7 @@ locals {
       disable_password_authentication = "false"
       network_interface_ids           = [azurerm_network_interface.network_interface["nic-linux-1-eth1"].id]
 
+      os_disk_name                 = "osdisk-vm-linux-1"
       os_disk_caching              = "ReadWrite"
       os_disk_storage_account_type = "Standard_LRS"
 
@@ -338,6 +335,7 @@ locals {
       disable_password_authentication = "false"
       network_interface_ids           = [azurerm_network_interface.network_interface["nic-linux-2-eth1"].id]
 
+      os_disk_name                 = "osdisk-vm-linux-2"
       os_disk_caching              = "ReadWrite"
       os_disk_storage_account_type = "Standard_LRS"
 
@@ -347,11 +345,42 @@ locals {
     }
   }
 
+  virtual_machines = {
+    "vm-fgt" = {
+      resource_group_name = local.resource_group_name
+      location            = local.location
+
+      name     = "vm-fgt"
+      vm_image = "fortigate"
+
+      network_interface_ids        = [azurerm_network_interface.network_interface["nic-fgt-port1"].id, azurerm_network_interface.network_interface["nic-fgt-port2"].id]
+      primary_network_interface_id = azurerm_network_interface.network_interface["nic-fgt-port1"].id
+
+      delete_os_disk_on_termination    = true
+      delete_data_disks_on_termination = true
+
+      identity_type = "SystemAssigned"
+
+      storage_os_disk_name              = "osdisk-vm-fgt-os"
+      storage_os_disk_caching           = "ReadWrite"
+      storage_os_disk_create_option     = "FromImage"
+      storage_os_disk_managed_disk_type = "Standard_LRS"
+
+      storage_data_disk_name              = "disk-vm-fgt-data"
+      storage_data_disk_create_option     = "Empty"
+      storage_data_disk_disk_size_gb      = "30"
+      storage_data_disk_lun               = 0
+      storage_data_disk_managed_disk_type = "Standard_LRS"
+
+      tags_ComputeType = "unknown"
+    }
+  }
+
   role_assignments = {
     "vm-fgt" = {
       scope                = local.resource_group_id
       role_definition_name = "Contributor"
-      principal_id         = azurerm_virtual_machine.virtual_machine.identity[0].principal_id
+      principal_id         = azurerm_virtual_machine.virtual_machine["vm-fgt"].identity[0].principal_id
     }
     format("aa-%s", local.username) = {
       scope                = local.resource_group_id

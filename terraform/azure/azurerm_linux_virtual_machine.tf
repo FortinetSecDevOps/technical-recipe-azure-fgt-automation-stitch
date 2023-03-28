@@ -19,6 +19,7 @@ resource "azurerm_linux_virtual_machine" "linux_virtual_machine" {
   }
 
   os_disk {
+    name                 = each.value.os_disk_name
     caching              = each.value.os_disk_caching
     storage_account_type = each.value.os_disk_storage_account_type
   }

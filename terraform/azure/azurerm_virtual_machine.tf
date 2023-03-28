@@ -1,63 +1,59 @@
-locals {
-  hostname = "vm-fgt"
-}
-
 resource "azurerm_virtual_machine" "virtual_machine" {
-  resource_group_name = local.resource_group_name
-  location            = local.location
+  for_each = local.virtual_machines
 
-  name = local.hostname
+  resource_group_name = each.value.resource_group_name
+  location            = each.value.location
 
-  network_interface_ids        = [azurerm_network_interface.network_interface["nic-fgt-port1"].id, azurerm_network_interface.network_interface["nic-fgt-port2"].id]
-  primary_network_interface_id = azurerm_network_interface.network_interface["nic-fgt-port1"].id
-  vm_size                      = local.vm_image["fortigate"].vm_size
+  name = each.value.name
 
-  delete_os_disk_on_termination    = true
-  delete_data_disks_on_termination = true
+  network_interface_ids        = each.value.network_interface_ids
+  primary_network_interface_id = each.value.primary_network_interface_id
+  vm_size                      = local.vm_image[each.value.vm_image].vm_size
 
-  zones = [1]
+  delete_os_disk_on_termination    = each.value.delete_os_disk_on_termination
+  delete_data_disks_on_termination = each.value.delete_data_disks_on_termination
 
   identity {
-    type = "SystemAssigned"
+    type = each.value.identity_type
   }
 
   storage_image_reference {
-    publisher = local.vm_image["fortigate"].publisher
-    offer     = local.vm_image["fortigate"].offer
-    sku       = local.vm_image["fortigate"].license_type == "byol" ? local.vm_image["fortigate"].sku["byol"] : local.vm_image["fortigate"].sku["payg"]
-    version   = local.vm_image["fortigate"].version
+    publisher = local.vm_image[each.value.vm_image].publisher
+    offer     = local.vm_image[each.value.vm_image].offer
+    sku       = local.vm_image[each.value.vm_image].sku
+    version   = local.vm_image[each.value.vm_image].version
   }
 
   plan {
-    name      = local.vm_image["fortigate"].license_type == "byol" ? local.vm_image["fortigate"].sku["byol"] : local.vm_image["fortigate"].sku["payg"]
-    publisher = local.vm_image["fortigate"].publisher
-    product   = local.vm_image["fortigate"].offer
+    name      = local.vm_image[each.value.vm_image].sku
+    publisher = local.vm_image[each.value.vm_image].publisher
+    product   = local.vm_image[each.value.vm_image].offer
   }
 
   storage_os_disk {
-    name              = "disk-vm-fgt-os"
-    caching           = "ReadWrite"
-    managed_disk_type = "Standard_LRS"
-    create_option     = "FromImage"
+    name              = each.value.storage_os_disk_name
+    caching           = each.value.storage_os_disk_caching
+    create_option     = each.value.storage_os_disk_create_option
+    managed_disk_type = each.value.storage_os_disk_managed_disk_type
   }
 
   # Log data disks
   storage_data_disk {
-    name              = "disk-vm-fgt-data"
-    managed_disk_type = "Standard_LRS"
-    create_option     = "Empty"
-    lun               = 0
-    disk_size_gb      = "30"
+    name              = each.value.storage_data_disk_name
+    create_option     = each.value.storage_data_disk_create_option
+    disk_size_gb      = each.value.storage_data_disk_disk_size_gb
+    lun               = each.value.storage_data_disk_lun
+    managed_disk_type = each.value.storage_data_disk_managed_disk_type
   }
 
   os_profile {
-    computer_name  = local.hostname
+    computer_name  = each.value.name
     admin_username = local.username
     admin_password = local.password
     custom_data = templatefile("${local.fgtvm_configuration}", {
-      hostname     = local.hostname
+      hostname     = each.value.name
       api_key      = random_string.string.id
-      type         = local.vm_image["fortigate"].license_type
+      type         = local.vm_image[each.value.vm_image].sku
       license_file = local.license_file
     })
   }
@@ -69,9 +65,5 @@ resource "azurerm_virtual_machine" "virtual_machine" {
   boot_diagnostics {
     enabled     = true
     storage_uri = ""
-  }
-
-  tags = {
-    environment = local.environment_tag
   }
 }
