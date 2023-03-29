@@ -5,6 +5,8 @@ title = 'Workshop Documentation'
 defaultContentLanguage = "en"
 
 #theme = ["hugo-notice", "hugo-theme-learn"]
+theme = ["hugo-notice"]
+
 metaDataFormat = "yaml"
 defaultContentLanguageInSubdir= "false"
 uglyurls = "true"
