@@ -40,11 +40,6 @@ enableEmoji = true
   themeVariant = "red"
 
 
-  #landingPageURL = "/DemoFrontEnd"
-  #landingPageName = "<i class='fas fa-home'></i> Home"
-
-
-
 [outputs]
 home = [ "HTML", "RSS", "JSON"]
 
