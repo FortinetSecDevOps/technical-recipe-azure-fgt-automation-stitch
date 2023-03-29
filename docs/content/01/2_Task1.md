@@ -11,33 +11,33 @@ weight: 2
     ![cloudshell1](../images/cloudshell-01.jpg)
     ![cloudshell2](../images/cloudshell-02.jpg)
 
-* Click the link "Skip for now (14 days until this is required)" do not click the "Next" button
+* Click the button "Ask Later" **do not click** the "Next" button
 
-    ![cloudshell3](https://raw.githubusercontent.com/FortinetSecDevOps/technical-recipe-azure-sdwan/main/images/cloudshell-03.jpg)
+    ![cloudshell3](../images/cloudshell-03.jpg)
 
 * Click the "Next" button
 
-    ![cloudshell4](https://raw.githubusercontent.com/FortinetSecDevOps/technical-recipe-azure-sdwan/main/images/cloudshell-04.jpg)
+    ![cloudshell4](../images/cloudshell-04.jpg)
 
 * Click on Cloud Shell icon on the Top Right side of the portal
 
-    ![cloudshell5](https://raw.githubusercontent.com/FortinetSecDevOps/technical-recipe-azure-sdwan/main/images/cloudshell-05.jpg)
+    ![cloudshell5](../images/cloudshell-05.jpg)
 
 * Select **Bash**
 
-    ![cloudshell6](https://raw.githubusercontent.com/FortinetSecDevOps/technical-recipe-azure-sdwan/main/images/cloudshell-06.jpg)
+    ![cloudshell6](../images/cloudshell-06.jpg)
 
 * Click on **Show advanced settings**
 
-    ![cloudshell7](https://raw.githubusercontent.com/FortinetSecDevOps/technical-recipe-azure-sdwan/main/images/cloudshell-07.jpg)
+    ![cloudshell7](../images/cloudshell-07.jpg)
 * Select
-  * Use existing Resource Group  - it ***should*** auto populate with USERXX-workshop-sdwan (USERXX is your Username)
-  * Use existing Storage account - it ***should*** auto populate with USERXX########## (########## is a random string)
+  * Use existing Resource Group  - it ***should*** auto populate with USERXX-fgt-as-workshop (USERXX is your Username)
+  * Use existing Storage account - it ***should*** auto populate with USERXX############ (############ is a random string)
   * Use existing File Share  - type **cloudshellshare**
 * Click "Attach Storage"
 
-    ![cloudshell8](https://raw.githubusercontent.com/FortinetSecDevOps/technical-recipe-azure-sdwan/main/images/cloudshell-08.jpg)
+    ![cloudshell8](../images/cloudshell-08.jpg)
 
 * You should now have access to Azure Cloud Shell console
 
-    ![cloudshell9](https://raw.githubusercontent.com/FortinetSecDevOps/technical-recipe-azure-sdwan/main/images/cloudshell-09.jpg)
+    ![cloudshell9](../images/cloudshell-09.jpg)

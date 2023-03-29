@@ -4,7 +4,7 @@ chapter: true
 weight: 1
 ---
 
-## Fortinet Azure SDWAN Networking Workshop
+## Fortinet FortiGate Automation Stitch Workshop
 
 ### Chapter 1 - Provisioning the Azure environment (40min)
 
