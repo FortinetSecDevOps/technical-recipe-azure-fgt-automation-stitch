@@ -27,6 +27,7 @@ jobs:
           tar -C ${RUNNER_TEMP} -zxvf /tmp/hugo.tar.gz hugo          
       - name: Build
         run: ${RUNNER_TEMP}/hugo
+        working-directory: ./docs
 
       - name: Deploy
         if: github.ref == 'refs/heads/main'
