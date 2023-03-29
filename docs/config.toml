@@ -1,4 +1,4 @@
-baseURL = "https://fortinetsecdevops.github.io/technical-recipe-azure-fgt-automation-stitch/docs/"
+baseURL = "https://fortinetsecdevops.github.io/technical-recipe-azure-fgt-automation-stitch/"
 languageCode = 'en-us'
 title = 'Workshop Documentation'
 
