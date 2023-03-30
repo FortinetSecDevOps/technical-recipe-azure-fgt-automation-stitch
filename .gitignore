@@ -31,3 +31,4 @@ override.tf.json
 # Misc
 .vscode
 *.auto.tfvars
+.hugo_build.lock
