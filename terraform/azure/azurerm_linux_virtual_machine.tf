@@ -31,6 +31,10 @@ resource "azurerm_linux_virtual_machine" "linux_virtual_machine" {
     sku       = local.vm_image[each.value.vm_image].sku
   }
 
+  boot_diagnostics {
+    storage_account_uri = ""
+  }
+
   tags = {
     ComputeType = each.value.tags_ComputeType
   }
