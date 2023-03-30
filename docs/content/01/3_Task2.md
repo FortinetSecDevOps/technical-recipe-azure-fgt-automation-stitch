@@ -28,5 +28,3 @@ terraform apply -var="username=$env:USER" -auto-approve
   ![terraform1](../images/terraform-01.jpg)
   ![terraform2](../images/terraform-02.jpg)
   ![terraform3](../images/terraform-03.jpg)
-
-* The current state of the Architecture is shown below.
