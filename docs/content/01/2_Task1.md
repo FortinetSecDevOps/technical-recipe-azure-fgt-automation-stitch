@@ -11,33 +11,28 @@ weight: 2
     ![cloudshell1](../images/cloudshell-01.jpg)
     ![cloudshell2](../images/cloudshell-02.jpg)
 
-* Click the button "Ask Later" **do not click** the "Next" button
+* Click the  "Ask Later" button __do not click__ the "Next" button
 
     ![cloudshell3](../images/cloudshell-03.jpg)
 
-* Click the "Next" button
-
-    ![cloudshell4](../images/cloudshell-04.jpg)
-
 * Click on Cloud Shell icon on the Top Right side of the portal
 
-    ![cloudshell5](../images/cloudshell-05.jpg)
+    ![cloudshell5](../images/cloudshell-04.jpg)
 
-* Select **Bash**
+* Select __PowerShell__
+    ![cloudshell6](../images/cloudshell-05.jpg)
 
-    ![cloudshell6](../images/cloudshell-06.jpg)
+* Click on __Show advanced settings__
 
-* Click on **Show advanced settings**
-
-    ![cloudshell7](../images/cloudshell-07.jpg)
+    ![cloudshell7](../images/cloudshell-06.jpg)
 * Select
-  * Use existing Resource Group  - it ***should*** auto populate with USERXX-fgt-as-workshop (USERXX is your Username)
-  * Use existing Storage account - it ***should*** auto populate with USERXX############ (############ is a random string)
-  * Use existing File Share  - type **cloudshellshare**
+  * __Use existing__ Resource Group  - it ___should___ auto populate with USERXX-fgt-as-workshop (USERXX is your Username)
+  * __Use existing__ Storage account - it ___should___ auto populate with USERXX############ (############ is a random string)
+  * __Use existing__ File Share  - type __cloudshellshare__
 * Click "Attach Storage"
 
-    ![cloudshell8](../images/cloudshell-08.jpg)
+    ![cloudshell8](../images/cloudshell-07.jpg)
 
-* You should now have access to Azure Cloud Shell console
+* You now have access to Azure Cloud Shell console. Maximize the console window
 
-    ![cloudshell9](../images/cloudshell-09.jpg)
+    ![cloudshell9](../images/cloudshell-08.jpg)
