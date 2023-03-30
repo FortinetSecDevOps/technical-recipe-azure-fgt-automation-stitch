@@ -35,11 +35,11 @@ weight: 4
 
       ***
 
-      1. Minimize the Cloudshell console window
-      1. Click the slide-drawer menu icon (sometimes referred to as the hamburger menu )
-      1. Click Home
-      1. Click Resource Groups
-      1. Click you Resource Group `USERXX-fgt-as-workshop`
+      1. __Minimize__ the Cloudshell console window
+      1. __Click__ the slide-drawer menu icon (sometimes referred to as the hamburger menu )
+      1. __Click__ Home
+      1. __Click__ Resource Groups
+      1. __Click__ your Resource Group `USERXX-fgt-as-workshop`
 
       ![resourcegroup1](../images/resourcegroup-01.jpg)
       ![resourcegroup2](../images/resourcegroup-02.jpg)
