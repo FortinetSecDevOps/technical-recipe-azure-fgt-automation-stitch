@@ -8,7 +8,7 @@ resource "azurerm_virtual_machine" "virtual_machine" {
 
   network_interface_ids        = each.value.network_interface_ids
   primary_network_interface_id = each.value.primary_network_interface_id
-  vm_size                      = local.vm_image[each.value.vm_image].vm_size
+  vm_size                      = each.value.vm_size
 
   delete_os_disk_on_termination    = each.value.delete_os_disk_on_termination
   delete_data_disks_on_termination = each.value.delete_data_disks_on_termination
@@ -18,16 +18,16 @@ resource "azurerm_virtual_machine" "virtual_machine" {
   }
 
   storage_image_reference {
-    publisher = local.vm_image[each.value.vm_image].publisher
-    offer     = local.vm_image[each.value.vm_image].offer
-    sku       = local.vm_image[each.value.vm_image].sku
-    version   = local.vm_image[each.value.vm_image].version
+    publisher = each.value.storage_image_reference_publisher
+    offer     = each.value.storage_image_reference_offer
+    sku       = each.value.storage_image_reference_sku
+    version   = each.value.storage_image_reference_version
   }
 
   plan {
-    name      = local.vm_image[each.value.vm_image].sku
-    publisher = local.vm_image[each.value.vm_image].publisher
-    product   = local.vm_image[each.value.vm_image].offer
+    name      = each.value.plan_name
+    publisher = each.value.plan_publisher
+    product   = each.value.plan_product
   }
 
   storage_os_disk {
@@ -48,13 +48,13 @@ resource "azurerm_virtual_machine" "virtual_machine" {
 
   os_profile {
     computer_name  = each.value.name
-    admin_username = local.username
-    admin_password = local.password
-    custom_data = templatefile("${local.fgtvm_configuration}", {
+    admin_username = each.value.os_profile_admin_username
+    admin_password = each.value.os_profile_admin_password
+    custom_data = templatefile("${each.value.os_profile_custom_data}", {
       hostname     = each.value.name
-      api_key      = random_string.string.id
-      type         = local.vm_image[each.value.vm_image].sku
-      license_file = local.license_file
+      api_key      = each.value.os_profile_custom_data_api_key
+      type         = each.value.os_profile_custom_data_type
+      license_file = each.value.os_profile_custom_data_license_file
     })
   }
 

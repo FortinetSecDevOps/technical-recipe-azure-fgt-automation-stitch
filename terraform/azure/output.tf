@@ -11,3 +11,7 @@ output "credentials" {
   sensitive = true
 }
 
+output "webhook" {
+  value     = azurerm_automation_webhook.automation_webhook["Update-RouteTable_webhook"].uri
+  sensitive = true
+}

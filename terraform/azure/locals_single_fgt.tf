@@ -2,17 +2,14 @@ locals {
   resource_group_exists        = true
   resource_group_name_combined = "${local.username}-${var.resource_group_name_suffix}"
 
-  username = var.username
-  password = "Fortinet123#"
-
-  license_file        = ""
-  fgtvm_configuration = "fgtvm.conf"
-
   location = "eastus"
 
   resource_group_name     = local.resource_group_exists ? data.azurerm_resource_group.resource_group.0.name : azurerm_resource_group.resource_group.0.name
   resource_group_location = local.resource_group_exists ? data.azurerm_resource_group.resource_group.0.location : azurerm_resource_group.resource_group.0.location
   resource_group_id       = local.resource_group_exists ? data.azurerm_resource_group.resource_group.0.id : azurerm_resource_group.resource_group.0.id
+
+  username = var.username
+  password = "Fortinet123#"
 
   environment_tag = "Terraform Single FortiGate"
 
@@ -169,6 +166,7 @@ locals {
       ip_configurations = [
         {
           name                          = "ipconfig1"
+          primary                       = true
           subnet_id                     = azurerm_subnet.subnet["snet-external"].id
           private_ip_address_allocation = "Static"
           private_ip_address            = cidrhost(azurerm_subnet.subnet["snet-external"].address_prefixes[0], 4)
@@ -187,6 +185,7 @@ locals {
       ip_configurations = [
         {
           name                          = "ipconfig1"
+          primary                       = true
           subnet_id                     = azurerm_subnet.subnet["snet-internal"].id
           private_ip_address_allocation = "Static"
           private_ip_address            = cidrhost(azurerm_subnet.subnet["snet-internal"].address_prefixes[0], 4)
@@ -205,6 +204,7 @@ locals {
       ip_configurations = [
         {
           name                          = "ipconfig1"
+          primary                       = true
           subnet_id                     = azurerm_subnet.subnet["snet-protected"].id
           private_ip_address_allocation = "Static"
           private_ip_address            = cidrhost(azurerm_subnet.subnet["snet-protected"].address_prefixes[0], 4)
@@ -223,6 +223,7 @@ locals {
       ip_configurations = [
         {
           name                          = "ipconfig1"
+          primary                       = true
           subnet_id                     = azurerm_subnet.subnet["snet-protected"].id
           private_ip_address_allocation = "Static"
           private_ip_address            = cidrhost(azurerm_subnet.subnet["snet-protected"].address_prefixes[0], 5)
@@ -311,15 +312,26 @@ locals {
       resource_group_name = local.resource_group_name
       location            = local.location
 
-      name     = "vm-linux-1"
-      vm_image = "linux_vm"
+      name = "vm-linux-1"
+      size = local.vm_image["linux_vm"].vm_size
 
       disable_password_authentication = "false"
-      network_interface_ids           = [azurerm_network_interface.network_interface["nic-linux-1-eth1"].id]
+
+      admin_username = local.username
+      admin_password = local.password
+
+      network_interface_ids = [azurerm_network_interface.network_interface["nic-linux-1-eth1"].id]
+
+      identity_type = "SystemAssigned"
 
       os_disk_name                 = "osdisk-vm-linux-1"
       os_disk_caching              = "ReadWrite"
       os_disk_storage_account_type = "Standard_LRS"
+
+      source_image_reference_publisher = local.vm_image["linux_vm"].publisher
+      source_image_reference_offer     = local.vm_image["linux_vm"].offer
+      source_image_reference_version   = local.vm_image["linux_vm"].version
+      source_image_reference_sku       = local.vm_image["linux_vm"].sku
 
       identity_type = "SystemAssigned"
 
@@ -329,17 +341,26 @@ locals {
       resource_group_name = local.resource_group_name
       location            = local.location
 
-      name     = "vm-linux-2"
-      vm_image = "linux_vm"
+      name = "vm-linux-2"
+      size = local.vm_image["linux_vm"].vm_size
 
       disable_password_authentication = "false"
-      network_interface_ids           = [azurerm_network_interface.network_interface["nic-linux-2-eth1"].id]
+
+      admin_username = local.username
+      admin_password = local.password
+
+      network_interface_ids = [azurerm_network_interface.network_interface["nic-linux-2-eth1"].id]
+
+      identity_type = "SystemAssigned"
 
       os_disk_name                 = "osdisk-vm-linux-2"
       os_disk_caching              = "ReadWrite"
       os_disk_storage_account_type = "Standard_LRS"
 
-      identity_type = "SystemAssigned"
+      source_image_reference_publisher = local.vm_image["linux_vm"].publisher
+      source_image_reference_offer     = local.vm_image["linux_vm"].offer
+      source_image_reference_version   = local.vm_image["linux_vm"].version
+      source_image_reference_sku       = local.vm_image["linux_vm"].sku
 
       tags_ComputeType = "WebServer"
     }
@@ -350,8 +371,8 @@ locals {
       resource_group_name = local.resource_group_name
       location            = local.location
 
-      name     = "vm-fgt"
-      vm_image = "fortigate"
+      name    = "vm-fgt"
+      vm_size = local.vm_image["fortigate"].vm_size
 
       network_interface_ids        = [azurerm_network_interface.network_interface["nic-fgt-port1"].id, azurerm_network_interface.network_interface["nic-fgt-port2"].id]
       primary_network_interface_id = azurerm_network_interface.network_interface["nic-fgt-port1"].id
@@ -360,6 +381,15 @@ locals {
       delete_data_disks_on_termination = true
 
       identity_type = "SystemAssigned"
+
+      storage_image_reference_publisher = local.vm_image["fortigate"].publisher
+      storage_image_reference_offer     = local.vm_image["fortigate"].offer
+      storage_image_reference_sku       = local.vm_image["fortigate"].sku
+      storage_image_reference_version   = local.vm_image["fortigate"].version
+
+      plan_name      = local.vm_image["fortigate"].sku
+      plan_publisher = local.vm_image["fortigate"].publisher
+      plan_product   = local.vm_image["fortigate"].offer
 
       storage_os_disk_name              = "osdisk-vm-fgt-os"
       storage_os_disk_caching           = "ReadWrite"
@@ -371,6 +401,13 @@ locals {
       storage_data_disk_disk_size_gb      = "30"
       storage_data_disk_lun               = 0
       storage_data_disk_managed_disk_type = "Standard_LRS"
+
+      os_profile_admin_username           = local.username
+      os_profile_admin_password           = local.password
+      os_profile_custom_data              = "fgtvm.conf"
+      os_profile_custom_data_api_key      = random_string.string.id
+      os_profile_custom_data_type         = local.vm_image["fortigate"].sku
+      os_profile_custom_data_license_file = ""
 
       tags_ComputeType = "unknown"
     }

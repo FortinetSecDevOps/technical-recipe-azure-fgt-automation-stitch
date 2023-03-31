@@ -5,14 +5,14 @@ resource "azurerm_linux_virtual_machine" "linux_virtual_machine" {
   location            = each.value.location
 
   name = each.value.name
-
-  network_interface_ids = each.value.network_interface_ids
-  size                  = local.vm_image[each.value.vm_image].vm_size
+  size = each.value.size
 
   disable_password_authentication = each.value.disable_password_authentication
 
-  admin_username = local.username
-  admin_password = local.password
+  admin_username = each.value.admin_username
+  admin_password = each.value.admin_password
+
+  network_interface_ids = each.value.network_interface_ids
 
   identity {
     type = each.value.identity_type
@@ -25,10 +25,10 @@ resource "azurerm_linux_virtual_machine" "linux_virtual_machine" {
   }
 
   source_image_reference {
-    publisher = local.vm_image[each.value.vm_image].publisher
-    offer     = local.vm_image[each.value.vm_image].offer
-    version   = local.vm_image[each.value.vm_image].version
-    sku       = local.vm_image[each.value.vm_image].sku
+    publisher = each.value.source_image_reference_publisher
+    offer     = each.value.source_image_reference_offer
+    version   = each.value.source_image_reference_version
+    sku       = each.value.source_image_reference_sku
   }
 
   boot_diagnostics {
