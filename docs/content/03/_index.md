@@ -1,19 +1,19 @@
 ---
-title: "Chapter 3 - FortiGate Automation Stitch"
+title: "Chapter 3 - FortiGate Simple Automation Stitch"
 chapter: true
 weight: 3
 ---
 
 ## Fortinet FortiGate Automation Stitch Workshop
 
-### Chapter 3 - FortiGate Automation Stitch
+### Chapter 3 - FortiGate Simple Automation Stitch
+
+A FortiGate Automation Stitch brings together a Trigger and one of more Actions.
 
 Tasks
 
-* Create a Simple Automation Stitch
-  * Email when a user logs in or out
-* Create a Complex Automation Stitch
-  * Update an Azure Route table to micro-segment VMs in the same subnet, using host routes
-    * Utilize FortiGate Azure SDN Connector
-    * Utilize FortiGate Dynamic Address Objects in FortiGate Policy
-    * Utilize FortiGate Log entries as an Automation Stitch trigger
+* Create a Simple Automation Stitch - Email when an Admin user logs in, out or fails login.
+  * Create an Automation Trigger
+  * Create an Automation Action
+  * Create an Automation Stitch
+* Check that the Automation Stitch is working
