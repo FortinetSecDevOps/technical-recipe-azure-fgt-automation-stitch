@@ -4,6 +4,8 @@ chapter: true
 weight: 2
 ---
 
+### Task 1 - Create FortiGate Azure SDN Connector and Dynamic Address Objects
+
 The completed Automation Stitch trigger will be when a log is recorded for the following events:
 
 * Dynamic address added
@@ -15,23 +17,21 @@ The Dynamic address filters utilize the data returned from the FortiGate Azure S
 
 The configurations are presented as a combination of FortiGate CLI commands and screenshots of the configured object.  All of the command blocks can be copied and pasted into the FortiGate CLI console.
 
-### Task 1 - Create FortiGate Azure SDN Connector and Dynamic Address Objects
-
 1. **Login** to the FortiGate using the IP address and credentials from the Terraform output.
 1. **Click** through any opening screens for FortiGate setup actions, no changes are required.
 1. **Click** the CLI Console
 1. **Enter** the following CLI commands to create an Azure SDN Connector named "AzureSDN"
 
-```bash
-config system sdn-connector
-    edit "AzureSDN"
-        set type azure
-    next
-end
-```
+        ```bash
+        config system sdn-connector
+            edit "AzureSDN"
+                set type azure
+            next
+        end
+        ```
 
-  ![sdnconnector1](../images/sdnconnector-01.jpg)
-  ![sdnconnector2](../images/sdnconnector-02.jpg)
+    ![sdnconnector1](../images/sdnconnector-01.jpg)
+    ![sdnconnector2](../images/sdnconnector-02.jpg)
 
 #### View the Created Azure SDN Connector
 
@@ -45,9 +45,9 @@ end
 
 1. **Double-Click** "AzureSDN" to view the configuration in the UI
 
-  ![sdnconnector3](../images/sdnconnector-03.jpg)
-  ![sdnconnector4](../images/sdnconnector-04.jpg)
-  ![sdnconnector5](../images/sdnconnector-05.jpg)
+    ![sdnconnector3](../images/sdnconnector-03.jpg)
+    ![sdnconnector4](../images/sdnconnector-04.jpg)
+    ![sdnconnector5](../images/sdnconnector-05.jpg)
 
 Notice that the switch "Use managed identity" is enabled. This allows the FortiGate to issue Azure Resource Manager API calls to read the Azure environment.  The "Resource path" can also be enabled to scope the read requests to a particular "Subscription ID" and "Resource group".
 
