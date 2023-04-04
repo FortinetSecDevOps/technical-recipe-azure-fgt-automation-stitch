@@ -6,7 +6,7 @@ weight: 3
 
 ## Fortinet FortiGate Automation Stitch Workshop
 
-### Chapter 3 - FortiGate Simple Automation Stitch
+### Chapter 3 - FortiGate Simple Automation Stitch (10min)
 
 A FortiGate Automation Stitch brings together a Trigger and one of more Actions.
 
