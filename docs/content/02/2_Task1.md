@@ -26,8 +26,8 @@ The overview shows details bout the Runbook. Important items to note are the Run
 
 The Runbook can be executed in several ways.
 
-    * Manually
-    * Linked to a schedule
-    * Via a Webhook
+* Manually
+* Linked to a schedule
+* Via a Webhook
 
   ![runbook1](../images/runbook-01.jpg)

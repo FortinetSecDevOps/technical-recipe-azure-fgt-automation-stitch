@@ -4,9 +4,9 @@ chapter: true
 weight: 5
 ---
 
-In this task check that the Automation Stitch is working
-
 ### Task 4 - Test the Automation Stitch
+
+This task checks that the Automation Stitch is working.
 
 1. **Logout**
 1. **Login** with an incorrect password

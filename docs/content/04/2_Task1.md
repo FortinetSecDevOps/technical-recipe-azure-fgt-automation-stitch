@@ -70,7 +70,6 @@ The Azure "Contributor" role has been assigned to the FortiGate's associated Azu
 #### Create Dynamic Addresses
 
 1. Use the FortiGate CLI Console to enter the following commands
-
 1. Create **AppServers** Address
 
     ```bash
@@ -93,7 +92,7 @@ The Azure "Contributor" role has been assigned to the FortiGate's associated Azu
             set filter "Tag.ComputeType=DbServer"
         next
     end
-    ```
+        ```
 
 1. Create **WebServers** Address
 

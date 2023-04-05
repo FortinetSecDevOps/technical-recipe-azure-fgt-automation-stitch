@@ -4,9 +4,9 @@ chapter: true
 weight: 2
 ---
 
-In this task create the trigger for when an Admin logs in or out or fails to login.
-
 ### Task 1 - Create Automation Trigger
+
+This task creates the trigger for when an Admin logs in or out or fails to login.
 
 1. **Login** to the FortiGate using the IP address and credentials from the Terraform output.
 1. **Click** through any opening screens for FortiGate setup actions, no changes are required.

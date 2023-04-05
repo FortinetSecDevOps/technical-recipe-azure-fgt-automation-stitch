@@ -4,9 +4,9 @@ chapter: true
 weight: 3
 ---
 
-In this task create the action to send an email indicating the Admin activity.
-
 ### Task 2 - Create Automation Action
+
+This task creates the action to send an email indicating the Admin activity.
 
 1. **Click** "Action"
 1. **Click** "Create New"

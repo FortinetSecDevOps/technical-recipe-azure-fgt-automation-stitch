@@ -4,9 +4,9 @@ chapter: true
 weight: 4
 ---
 
-In this task create the stitch that connects the trigger and the action(s)
-
 ### Task 3 - Create Automation Stitch
+
+This task creates the stitch that connects the trigger and the action(s).
 
 1. **Click** "Action"
 1. **Click** "Create New"
