@@ -1,12 +1,12 @@
 ---
-title: "Chapter 5 - FortiGate Policy & Routes"
+title: "Chapter 5 - FortiGate Policy & Route"
 chapter: true
 weight: 5
 ---
 
 ## Fortinet FortiGate Automation Stitch Workshop
 
-### Chapter 5 - FortiGate Policy & Routes (5min)
+### Chapter 5 - FortiGate Policy & Route (5min)
 
 The previous task was created a complex FortiGate Automation Stitch that when triggered caused a route table update in Azure utilizing and Azure Automation Runbook.
 
