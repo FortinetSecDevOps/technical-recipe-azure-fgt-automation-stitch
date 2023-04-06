@@ -1,7 +1,7 @@
 ---
 title: "Task 3 - Automation Action"
 chapter: true
-weight: 3
+weight: 4
 ---
 
 ## Create Complex Automation Stitch
@@ -82,3 +82,23 @@ The triggers setup in the last task can all utilize the same action.
     * **Click** the "Action" tab
 
       ![complexstitchtask3-2](../images/complex_stitch_task3-02.jpg)
+
+1. View **routetableupdate** configuration in the FortiGate UI
+    * **Double-Click** the **routetableupdate** trigger
+
+      ![complexstitchtask3-3](../images/complex_stitch_task3-03.jpg)
+
+  The Action fields
+
+* Protocol - HTTP or HTTPS
+* URL - the Azure Automation Webhook is entered into this field without the **https://** prefix
+* Custom Port - the port the Azure Automation Webhook is listening on
+* Method - the HTTPS method
+* HTTP body - the body of the POST request - in this request the body is formatted as JSON. The items %%log.action%% and %%log.addr%% represent the FortiGate event log fields from the log that triggered the action. These values are:
+  * log.action - **object-add** or **object-remove**
+  * log.addr - the IP address of the VM with the **ComputeType** tag
+* HTTP header - additional header fields - these fields could also have been passed in the HTTP body
+  * ResourceGroupName - the name of the Azure Resource Group containing the Azure Route table to update
+  * RouteTableName - the name of the Azure Route table to update
+  * RouteNamePrefix - a prefix for the routes managed by the Azure Automation Runbook
+  * NextHopIp - the Next Hop IP Address for the routes managed by the Azure Automation Runbook

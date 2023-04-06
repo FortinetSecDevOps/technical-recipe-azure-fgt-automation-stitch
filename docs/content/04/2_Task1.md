@@ -113,15 +113,15 @@ The Azure "Contributor" role has been assigned to the FortiGate's associated Azu
       ![dynamicaddress1](../images/dynamicaddress-01.jpg)
       ![dynamicaddress2](../images/dynamicaddress-02.jpg)
 
-As part of the environment deployment a linux VM with the name `vm-linux-2` was deployed and given the tag `ComputeType` with the value `WebServer`. The VM data retrieved by the Azure SDN connecter had a match for the `WebServers` address filter and populated the address object with the IP address of the VM `vm-linux-2` with the tag `ComputeType` with the value `WebServer`.
+As part of the environment deployment a linux VM with the name **vm-linux-2** was deployed and given the tag **ComputeType** with the value **WebServer**. The VM data retrieved by the Azure SDN connecter had a match for the **WebServers** address filter and populated the address object with the IP address of the VM **vm-linux-2** with the tag **ComputeType** with the value **WebServer**.
 
 The red exclamation point near the address name indicates that the filter(s) for the address did not match anything.
 
 1. View the Matched addresses in the FortiGate UI
-    * **Hover** over the address name `WebServers`
+    * **Hover** over the address name **WebServers**
     * **Click** the "View Matched Addresses" button
 
 1. View an Address configuration in the FortiGate UI
-    * **Double-Click** the `WebServers` Address
+    * **Double-Click** the **WebServers** Address
 
       ![dynamicaddress3](../images/dynamicaddress-03.jpg)
