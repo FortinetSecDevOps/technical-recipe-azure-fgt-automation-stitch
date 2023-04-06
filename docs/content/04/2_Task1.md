@@ -22,13 +22,13 @@ The configurations are presented as a combination of FortiGate CLI commands and 
 1. **Click** the CLI Console
 1. **Enter** the following CLI commands to create an Azure SDN Connector named "AzureSDN"
 
-        ```bash
-        config system sdn-connector
-            edit "AzureSDN"
-                set type azure
-            next
-        end
-        ```
+    ```bash
+    config system sdn-connector
+        edit "AzureSDN"
+            set type azure
+        next
+    end
+    ```
 
     ![sdnconnector1](../images/sdnconnector-01.jpg)
     ![sdnconnector2](../images/sdnconnector-02.jpg)
@@ -92,7 +92,7 @@ The Azure "Contributor" role has been assigned to the FortiGate's associated Azu
             set filter "Tag.ComputeType=DbServer"
         next
     end
-        ```
+    ```
 
 1. Create **WebServers** Address
 
