@@ -88,21 +88,22 @@ The configurations are presented as a combination of FortiGate CLI commands and 
     end
     ```
 
-1. View the configured triggers in the FortiGate UI
+1. View the configured Triggers in the FortiGate UI
     * **Minimize** "CLI Console"
     * **Click** "Security Fabric"
-    * **Click** "External Connectors"
+    * **Click** "Automation"
+    * **Click** the "Trigger" tab
 
-    ![complexstitchtask1](../images/complex_stitch_task2-01.jpg)
+    ![complexstitchtask2-1](../images/complex_stitch_task2-01.jpg)
 
 1. View `WebServer Existence` configuration in the FortiGate UI
     * **Double-Click** the `WebServer Existence` trigger
 
     In the CLI configuration the `logid` was set by specifying the logid number. The `logid` in the CLI is called the `Event` in the UI in the UI **Clicking** the "+" in the event field opens the "Select Entries" dialog, where log events can be searched and selected by name.
 
-    ![complexstitchtask2](../images/complex_stitch_task2-02.jpg)
-    ![complexstitchtask3](../images/complex_stitch_task2-03.jpg)
+    ![complexstitchtask2-2](../images/complex_stitch_task2-02.jpg)
+    ![complexstitchtask2-3](../images/complex_stitch_task2-03.jpg)
 
     The "Field filter(s)" for a log event are the logs fields and the value expected in the log field.  In the trigger the Field filter is the log field `cfgobj`. Logs can be viewed in the UI, however, to view raw logs in the CLI, use the `execute log` command and sub-commands. An example of the event logs used in the trigger is shown below.
 
-    ![complexstitchtask3](../images/complex_stitch_task2-04.jpg)
+    ![complexstitchtask2-4](../images/complex_stitch_task2-04.jpg)
