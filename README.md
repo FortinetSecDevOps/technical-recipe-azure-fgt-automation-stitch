@@ -1,3 +1,3 @@
-# FortiGate Automation Stitches
+# Documentation
 
-[FortiGate Automation Stitches](https://fortinetsecdevops.github.io/technical-recipe-azure-fgt-automation-stitch/)
+[FortiGate Automation Stitches Workshop](https://fortinetsecdevops.github.io/technical-recipe-azure-fgt-automation-stitch/)

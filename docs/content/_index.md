@@ -16,7 +16,7 @@ TEC Workshops provide the learner with the opportunity to put into practice newl
 * An integrated lab and demo environment
 
   * Informational call-outs for key points to discuss or highlight to a customer
-  * Questions that could be asked while giving the TEC Recipe as a demo
+  * Questions that could be asked while giving the TEC Workshop as a demo
   * Points of value that relate the business value to the technical feature
 * A reference architecture(s)
 
