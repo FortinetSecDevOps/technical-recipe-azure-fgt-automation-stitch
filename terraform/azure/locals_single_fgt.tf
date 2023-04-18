@@ -249,10 +249,10 @@ locals {
   }
 
   network_security_rules = {
-    "nsr_external_ingress" = {
+    "nsgsr-external-ingress" = {
       resource_group_name = local.resource_group_name
 
-      name                        = "nsr_external_ingress"
+      name                        = "nsgsr-external-ingress"
       priority                    = 1001
       direction                   = "Inbound"
       access                      = "Allow"
@@ -263,10 +263,10 @@ locals {
       destination_address_prefix  = "*"
       network_security_group_name = azurerm_network_security_group.network_security_group["nsg-external"].name
     },
-    "nsr_external_egress" = {
+    "nsgsr-external-egress" = {
       resource_group_name = local.resource_group_name
 
-      name                        = "nsr_external_egress"
+      name                        = "nsgsr-external-egress"
       priority                    = 1002
       direction                   = "Outbound"
       access                      = "Allow"
@@ -277,10 +277,10 @@ locals {
       destination_address_prefix  = "*"
       network_security_group_name = azurerm_network_security_group.network_security_group["nsg-external"].name
     },
-    "nsr_internal_ingress" = {
+    "nsgsr-internal-ingress" = {
       resource_group_name = local.resource_group_name
 
-      name                        = "nsr_internal_ingress"
+      name                        = "nsgsr-internal-ingress"
       priority                    = 1001
       direction                   = "Inbound"
       access                      = "Allow"
@@ -291,10 +291,10 @@ locals {
       destination_address_prefix  = "*"
       network_security_group_name = azurerm_network_security_group.network_security_group["nsg-internal"].name
     },
-    "nsr_internal_egress" = {
+    "nsgsr-internal-egress" = {
       resource_group_name = local.resource_group_name
 
-      name                        = "nsr_internal_egress"
+      name                        = "nsgsr-internal-egress"
       priority                    = 1002
       direction                   = "Outbound"
       access                      = "Allow"
