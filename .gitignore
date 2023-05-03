@@ -32,3 +32,4 @@ override.tf.json
 .vscode
 *.auto.tfvars
 .hugo_build.lock
+fortigate_automation_action_cli.cfg
