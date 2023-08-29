@@ -34,10 +34,10 @@
 
 <form id="provision-lab" onsubmit="return formSubmit();">
   <label for="useremail">Please enter your email address (required)</label>
-  <input type="text" id="useremail" name="useremail" value="" />
-  <label for="customer">Please enter customer name</label>
+  <input type="text" required id="useremail" name="useremail" value="" />
+  <label for="customer">Please an associated customer name (if any)</label>
   <input type="text" id="customer" name="customer" value="" />
-  <label for="smartticket">Please enter the SMART Ticket</label>
+  <label for="smartticket">Please an associated SMART Ticket (if any)</label>
   <input type="text" id="smartticket" name="smartticket" value="" />
   <input type="submit" value="Provision" />
 </form>
